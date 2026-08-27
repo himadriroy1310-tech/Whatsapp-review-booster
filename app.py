@@ -423,9 +423,11 @@ def submit_feedback():
 
 
 # --------------------------------------------------------------------------- #
-# Entrypoint
+# Application Initialization
 # --------------------------------------------------------------------------- #
 
+# Run table creation immediately when Gunicorn loads the module
+init_db()
+
 if __name__ == "__main__":
-    init_db()
     app.run(debug=True, host="0.0.0.0", port=5000)
