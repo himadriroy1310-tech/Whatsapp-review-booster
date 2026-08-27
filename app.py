@@ -229,6 +229,8 @@ def find_existing_feedback(db, phone: str):
 @app.route("/")
 def dashboard():
     db = get_db()
+    
+    # 1. Fetch customer list
     rows = db.execute(
         "SELECT * FROM customers ORDER BY created_at DESC"
     ).fetchall()
@@ -246,6 +248,11 @@ def dashboard():
             "whatsapp_link": build_whatsapp_link(r["customer_name"], r["clean_phone"]),
         })
 
+    # 2. Fetch all negative feedback submissions
+    feedback_rows = db.execute(
+        "SELECT * FROM feedbacks ORDER BY submitted_at DESC"
+    ).fetchall()
+
     total_count = len(customers)
     pending_count = sum(1 for c in customers if c["status"] == "Pending")
     sent_count = sum(1 for c in customers if c["status"] == "Sent")
@@ -254,6 +261,7 @@ def dashboard():
         "dashboard.html",
         clinic_name=CLINIC_NAME,
         customers=customers,
+        feedbacks=feedback_rows,  # Pass feedback list to template
         country_codes=COUNTRY_CODES,
         total_count=total_count,
         pending_count=pending_count,
