@@ -440,6 +440,50 @@
     </table>
   </div>
 
+  <!-- Private Feedback Card Starts Here -->
+  <div class="card" style="border-left: 4px solid var(--danger); margin-top: 24px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+      <h2 style="margin: 0; color: var(--danger);">⚠️ Private Patient Feedback</h2>
+      <span style="font-size: 0.8rem; font-weight: 600; color: var(--muted);">
+        {{ feedbacks|length }} Complaint(s) Received
+      </span>
+    </div>
+
+    {% if feedbacks %}
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Patient Name</th>
+            <th>Phone</th>
+            <th>Issue / Feedback Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for f in feedbacks %}
+          <tr>
+            <td data-label="Date" class="timestamp">{{ f.submitted_at }}</td>
+            <td data-label="Patient Name"><strong>{{ f.customer_name }}</strong></td>
+            <td data-label="Phone">
+              <a href="tel:{{ f.phone }}" style="color: var(--navy-text); text-decoration: underline; font-weight: 500;">
+                +{{ f.phone }}
+              </a>
+            </td>
+            <td data-label="Feedback" style="max-width: 400px; line-height: 1.4;">
+              {{ f.feedback_text }}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p style="color: var(--muted); font-size: 0.9rem; margin: 8px 0;">
+        No complaints recorded. All ratings have been positive so far!
+      </p>
+    {% endif %}
+  </div>
+  <!-- Private Feedback Card Ends Here -->
+  
 </div>
 
 <script>
