@@ -24,7 +24,7 @@ from flask import (
 
 CLINIC_NAME = "Apex Dental Care"
 CLINIC_SLUG = "apex"
-BASE_DOMAIN = "https://your-domain.com"  # placeholder, update for production
+BASE_DOMAIN = "https://whatsapp-review-booster.onrender.com/"  # placeholder, update for production
 
 # Google Business Profile Place ID for the "positive sentiment" redirect.
 # Replace with the clinic's real Place ID before going live.
